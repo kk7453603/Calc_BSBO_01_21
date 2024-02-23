@@ -14,7 +14,7 @@ func Module(a, b float64) float64 {
 	return math.Mod(a, b)
 }
 
-func Sin(a, b float64) float64 {
+func Sin(a float64) float64 {
 
-	return a * b
+	return math.Sin(a)
 }
