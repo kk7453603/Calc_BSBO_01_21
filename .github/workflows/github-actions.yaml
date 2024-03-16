@@ -28,6 +28,15 @@ jobs:
               with:
                 name: Go-build
                 path: ~/rpmbuild/RPMS/x86_64/calc-1.0-1.fc39.x86_64.rpm
+    test:
+      runs-on: self-hosted
+      steps:
+        - uses: actions/checkout@v4
+        - name: Install dependencies
+          run: go mod tidy
+        - name: Start Go tests
+          run: go test -v ./...
+
 
 
 
