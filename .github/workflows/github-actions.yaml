@@ -23,6 +23,11 @@ jobs:
               run: mv calc-1.0.tar.gz ~/rpmbuild/SOURCES
             - name: build rpm pack
               run: rpmbuild -ba fedora.spec
+            - name: upload Go build results
+              uses: actions/upload-artifact@v4
+              with:
+                name: Go-build
+                path: ~/rpmbuild/RPMS/x86_64/calc-1.0-1.fc39.x86_64.rpm
 
 
 
