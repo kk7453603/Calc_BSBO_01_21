@@ -3,6 +3,34 @@ name: Go
 on: [push]
 
 jobs:
+  build-windows:
+    test:
+      runs-on: windows-latest
+      steps:
+        - uses: actions/checkout@v4
+        - name: Install dependencies
+          run: go mod tidy
+        - name: Start Go tests
+          run: go test -v ./...
+    deploy:
+      runs-on: windows-latest
+       - uses: actions/checkout@v4
+            - name: Setup Go 1.22
+              uses: actions/setup-go@v4
+              with:
+                go-version: '1.22'
+            - name: Check version
+              run: go version && go mod tidy
+            - name: prepare for build
+              run: go env -w GOOS=windows GOARCH=amd64
+            - name: Build
+              run: go build -o app.exe \cmd\main.go 
+            - name: Upload Go build results
+              uses: actions/upload-artifact@v4
+              with:
+                name: Go-build
+                path: app.exe
+  build-rpm:
     build:
         runs-on: self-hosted
         steps:
