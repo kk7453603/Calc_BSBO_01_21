@@ -19,5 +19,5 @@ build() {
 }
 
 package() {
-    install -Dm755 "../main" "../output/main"
+    install -Dm755 "./main" "../output/main"
 }
