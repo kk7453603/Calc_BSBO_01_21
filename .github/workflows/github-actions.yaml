@@ -11,17 +11,22 @@ jobs:
         uses: actions/setup-go@v4
         with:
           go-version: '1.22'
+
       - name: Check version
         run: go version && go mod tidy
+
       - name: Build
         run: go build -v ./...
+
       - name: Prepare tar.gz
         run: tar -czvf calc-1.0.tar.gz calc-1.0
+
       - name: Upload tar.gz
         uses: actions/upload-artifact@v4
         with:
           name: calc-1.0.tar.gz
           path: calc-1.0.tar.gz
+
   deploy:
     runs-on: arch-latest
     steps:
@@ -46,6 +51,7 @@ jobs:
         with:
           name: Go-build
           path: app
+
   test:
     runs-on: self-hosted
     steps:
